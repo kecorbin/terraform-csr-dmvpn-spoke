@@ -57,4 +57,5 @@ ios-config-55=" ip nat outside"
 ios-config-56="router eigrp 100"
 ios-config-57=" no auto-summary"
 ios-config-58=" network 10.0.0.0 0.255.255.255"
+ios-config-59=" network 192.168.1.0 0.0.0.255"
 

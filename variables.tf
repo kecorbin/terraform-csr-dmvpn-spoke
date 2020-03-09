@@ -23,9 +23,7 @@ variable "csr_hostname" {
     default = "hub_1"
 }
 
-variable "csr_internal_ip" {
-    default = "10.0.2.10"
-}
+variable "csr_internal_ip" {}
 
 variable "hub_organization" {}
 

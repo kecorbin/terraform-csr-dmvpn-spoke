@@ -27,6 +27,10 @@ variable "csr_internal_ip" {
     default = "10.0.2.10"
 }
 
+variable "hub_organization" {}
+
+variable "hub_workspace_name" {}
+
 variable "tunnel_key" {}
 
 variable "nhrp_authentication_key" {}

@@ -2,14 +2,14 @@ data "terraform_remote_state" "hub" {
   backend = "remote"
 
   config = {
-    organization = "Network"
+    organization = var.hub_organization
     workspaces = {
-      name = "terraform-csr-dmvpn-hub"
+      name = var.hub_workspace_name
     }
   }
 }
 
 locals {
     hub_public_ip = data.terraform_remote_state.hub.outputs.csr_ip
-    hub_tunnel_ip = "192.168.1.1"
+    hub_tunnel_ip = data.terraform_remote_state.hub.tunnel_ip
 }

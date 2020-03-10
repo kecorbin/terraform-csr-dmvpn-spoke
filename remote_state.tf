@@ -7,6 +7,9 @@ data "terraform_remote_state" "hub" {
       name = var.hub_workspace_name
     }
   }
+  defaults = {
+      csr_ip = "1.1.1.1"
+  }
 }
 
 locals {

@@ -65,7 +65,8 @@ data "template_file" "init" {
   template = "${file("${path.module}/templates/consul.tpl")}"
   vars = {
     datacenter = var.datacenter
-    primary_datacenter = var.csr_hostname
+    primary_datacenter = local.hub_datacenter
+    hub_consul_ip = local.hub_consul_ip
   }
 }
 

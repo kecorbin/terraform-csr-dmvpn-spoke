@@ -54,7 +54,9 @@ sudo chmod 640 /etc/consul.d/consul.hcl
 cat << EOF > /etc/consul.d/consul.hcl
 datacenter = "${datacenter}"
 primary_datacenter = "${primary_datacenter}"
+retry_join_wan = ["${hub_consul_ip}"]
 data_dir = "/opt/consul"
+
 connect {
   enabled = true
 }

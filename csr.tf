@@ -47,7 +47,7 @@ resource "aws_instance" "csr" {
 resource "aws_network_interface" "g2" {
   subnet_id         = module.vpc.private_subnets[0]
   private_ips       = [var.csr_internal_ip]
-  security_groups = [aws_security_group.private_subnet.id]
+  security_groups = [aws_security_group.allow_local.id]
   source_dest_check = false
 
   attachment {

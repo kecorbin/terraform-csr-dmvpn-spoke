@@ -41,10 +41,10 @@ resource "aws_instance" "csr" {
     network_interface_id = aws_network_interface.g1.id
     device_index         = 0
   }
-  // network_interface {
-  //   network_interface_id = aws_network_interface.g2.id
-  //   device_index         = 1
-  // }
+  network_interface {
+    network_interface_id = aws_network_interface.g2.id
+    device_index         = 1
+  }
 
 }
 
@@ -55,12 +55,12 @@ resource "aws_network_interface" "g1" {
 }
 
 
-// resource "aws_network_interface" "g2" {
-//   subnet_id         = module.vpc.private_subnets[0]
-//   private_ips       = [var.csr_internal_ip]
-//   security_groups   = [aws_security_group.allow_local.id]
-//   source_dest_check = false
-// }
+resource "aws_network_interface" "g2" {
+  subnet_id         = module.vpc.private_subnets[0]
+  private_ips       = [var.csr_internal_ip]
+  security_groups   = [aws_security_group.allow_local.id]
+  source_dest_check = false
+}
 
 output "csr_ip" {
   value = aws_eip.csr.public_ip

@@ -58,4 +58,7 @@ ios-config-56="router eigrp 100"
 ios-config-57=" no auto-summary"
 ios-config-58=" network 10.0.0.0 0.255.255.255"
 ios-config-59=" network 192.168.1.0 0.0.0.255"
+ios-config-60="ip nat inside source static tcp ${consul_ip} 22 interface GigabitEthernet1 2022"
+ios-config-61="ip nat inside source static tcp ${consul_ip} 8500 interface GigabitEthernet1 8500"
+ios-config-62="ip route ${internal_route} ${vpc_router}
 

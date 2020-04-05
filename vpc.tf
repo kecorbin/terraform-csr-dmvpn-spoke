@@ -14,23 +14,23 @@ module "vpc" {
 
 }
 
-resource "aws_route" "internal_10_nets" {
-  route_table_id         = module.vpc.private_route_table_ids[0]
-  destination_cidr_block = "10.0.0.0/8"
-  network_interface_id   = aws_network_interface.g2.id
-}
+// resource "aws_route" "internal_10_nets" {
+//   route_table_id         = module.vpc.private_route_table_ids[0]
+//   destination_cidr_block = "10.0.0.0/8"
+//   network_interface_id   = aws_network_interface.g2.id
+// }
 
-resource "aws_route" "default_route" {
-  route_table_id         = module.vpc.private_route_table_ids[0]
-  destination_cidr_block = var.mgmt_cidr
-  network_interface_id   = aws_network_interface.g2.id
-}
+// resource "aws_route" "default_route" {
+//   route_table_id         = module.vpc.private_route_table_ids[0]
+//   destination_cidr_block = var.mgmt_cidr
+//   network_interface_id   = aws_network_interface.g2.id
+// }
 
-resource "aws_route" "internal_192_168_nets" {
-  route_table_id         = module.vpc.private_route_table_ids[0]
-  destination_cidr_block = "192.168.0.0/16"
-  network_interface_id   = aws_network_interface.g2.id
-}
+// resource "aws_route" "internal_192_168_nets" {
+//   route_table_id         = module.vpc.private_route_table_ids[0]
+//   destination_cidr_block = "192.168.0.0/16"
+//   network_interface_id   = aws_network_interface.g2.id
+// }
 
 output "private_route_table_ids" {
   value = module.vpc.private_route_table_ids

@@ -32,28 +32,30 @@ resource "aws_instance" "csr" {
   instance_type = var.csr_instance_size
   key_name      = var.ssh_keypair_name
   user_data     = data.template_file.csr_userdata.rendered
-  vpc_security_group_ids = [
-    aws_security_group.csr_public.id,
-    aws_security_group.allow_local.id
-  ]
+  
+  network_interface {
+    network_interface_id = aws_network_interface.g1.id
+    device_index         = 0
+  }  
+  network_interface {
+    network_interface_id = aws_network_interface.g2.id
+    device_index         = 1
+  }  
 
-  subnet_id                   = module.vpc.public_subnets[0]
-  associate_public_ip_address = true
-  source_dest_check           = false
+}
 
+resource "aws_network_interface" "g1" {
+  subnet_id         = module.vpc.public_subnets[0]
+  security_groups   = [aws_security_group.csr_public.id]
+  source_dest_check = false
 }
 
 
 resource "aws_network_interface" "g2" {
   subnet_id         = module.vpc.private_subnets[0]
   private_ips       = [var.csr_internal_ip]
-  security_groups   = [aws_security_group.allow_local.id]
+  security_groups = [aws_security_group.allow_local.id]
   source_dest_check = false
-
-  attachment {
-    instance     = aws_instance.csr.id
-    device_index = 1
-  }
 }
 
 output "csr_ip" {

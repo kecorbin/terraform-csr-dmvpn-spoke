@@ -118,7 +118,7 @@ service {
   port = 9095
   connect {
     sidecar_service {
-      port = 20000
+      port = 20001
       check {
         name = "Connect Envoy Sidecar"
         tcp = "$LAN_IP:20001"

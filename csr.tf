@@ -27,6 +27,10 @@ data "template_file" "csr_userdata" {
   }
 }
 
+resource "aws_eip" "csr" {
+  network_interface = aws_network_interface.g1.id
+  vpc               = true
+}
 resource "aws_instance" "csr" {
   ami           = data.aws_ami.csr.id
   instance_type = var.csr_instance_size
@@ -59,7 +63,7 @@ resource "aws_network_interface" "g2" {
 }
 
 output "csr_ip" {
-  value = aws_instance.csr.public_ip
+  value = aws_eip.csr.public_ip
 }
 
 output "tunnel_ip" {

@@ -18,7 +18,7 @@ variable "private_subnets" {
 variable "ssh_keypair_name" {}
 
 variable "csr_instance_size" {
-    default ="c4.large"
+  default = "c4.large"
 }
 
 variable "csr_hostname" {

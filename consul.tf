@@ -64,22 +64,22 @@ resource "aws_iam_instance_profile" "consul" {
 data "template_file" "init" {
   template = "${file("${path.module}/templates/consul.tpl")}"
   vars = {
-    datacenter = var.datacenter
+    datacenter         = var.datacenter
     primary_datacenter = local.hub_datacenter
-    hub_consul_ip = local.hub_consul_ip
+    hub_consul_ip      = local.hub_consul_ip
   }
 }
 
 resource "aws_instance" "consul" {
-  ami                    = data.aws_ami.ubuntu.id
-  instance_type          = "m5.large"
-  subnet_id              = module.vpc.private_subnets[1]
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "m5.large"
+  subnet_id     = module.vpc.private_subnets[1]
   vpc_security_group_ids = [
     aws_security_group.consul_servers.id
   ]
-  user_data              = data.template_file.init.rendered
-  iam_instance_profile   = aws_iam_instance_profile.consul.name
-  key_name               = var.ssh_keypair_name
+  user_data            = data.template_file.init.rendered
+  iam_instance_profile = aws_iam_instance_profile.consul.name
+  key_name             = var.ssh_keypair_name
   tags = {
     Name = "consul"
     Env  = var.datacenter

@@ -102,10 +102,18 @@ service {
   connect {
     sidecar_service {
       port = 20000
+
       check {
         name = "Connect Envoy Sidecar"
         tcp = "$LAN_IP:20000"
         interval ="10s"
+      }
+      proxy {
+        upstreams {
+          destination_name = "api"
+          local_bind_address = "127.0.0.1"
+          local_bind_port = 8080
+        }
       }
     }
   }
@@ -142,8 +150,9 @@ services:
     network_mode: "host"
     environment:
       LISTEN_ADDR: 0.0.0.0:9094
+      UPSTREAM_URIS: "http://localhost:8080"
       NAME: web
-      MESSAGE: "web Service running in ${datacenter}"
+      MESSAGE: "web service running in ${datacenter}"
       SERVER_TYPE: "http"
     volumes:
       - "./web.hcl:/config/web.hcl"
@@ -164,7 +173,7 @@ services:
     environment:
       LISTEN_ADDR: 0.0.0.0:9095
       NAME: api
-      MESSAGE: "api Service running in ${datacenter}"
+      MESSAGE: "api service running in ${datacenter}"
       SERVER_TYPE: "http"
     volumes:
       - "./api.hcl:/config/api.hcl"

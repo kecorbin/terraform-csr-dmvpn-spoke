@@ -91,7 +91,7 @@ MeshGateway {
 }
 EOF
 
-consul config write proxy-defaults.hcl
+consul config write /home/ubuntu/proxy-defaults.hcl
 mkdir -p /home/ubuntu/app
 cat  << EOF > /home/ubuntu/app/web.hcl
 service {
@@ -221,8 +221,9 @@ sudo iptables -t nat -A PREROUTING -p tcp -m tcp --dport 53 -j REDIRECT --to-por
 sudo iptables -t nat -A OUTPUT -d localhost -p udp -m udp --dport 53 -j REDIRECT --to-ports 8600
 sudo iptables -t nat -A OUTPUT -d localhost -p tcp -m tcp --dport 53 -j REDIRECT --to-ports 8600
 
-cat << EOF > /etc/resolv.conf
-nameserver 127.0.0.1
-search ec2.internal consul
+cat << EOF > /etc/systemd/resolved.conf
+[Resolve]
+DNS=127.0.0.1
+Domains=~consul
 EOF
-
+sudo systemctl restart systemd-resolved.service

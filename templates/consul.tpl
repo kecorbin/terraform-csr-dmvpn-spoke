@@ -54,8 +54,8 @@ sudo chmod 640 /etc/consul.d/consul.hcl
 cat << EOF > /etc/consul.d/consul.hcl
 datacenter = "${datacenter}"
 primary_datacenter = "${primary_datacenter}"
-retry_join = ["provider=aws tag_key=consul tag_value=${datacenter}"]
-retry_join_wan = ["provider=aws tag_key=consul tag_value=${primary_datacenter}"]
+retry_join = ["provider=aws tag_key=Env tag_value=${datacenter}"]
+retry_join_wan = ["provider=aws tag_key=Env tag_value=${primary_datacenter}"]
 data_dir = "/opt/consul"
 
 connect {

@@ -57,7 +57,7 @@ primary_datacenter = "${primary_datacenter}"
 retry_join = ["provider=aws tag_key=Env tag_value=${datacenter}"]
 retry_join_wan = ["provider=aws region=us-east-1 tag_key=Env tag_value=${primary_datacenter}"]
 data_dir = "/opt/consul"
-
+enable_local_script_checks = true
 connect {
   enabled = true
 }

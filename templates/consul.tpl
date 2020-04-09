@@ -55,7 +55,7 @@ cat << EOF > /etc/consul.d/consul.hcl
 datacenter = "${datacenter}"
 primary_datacenter = "${primary_datacenter}"
 retry_join = ["provider=aws tag_key=Env tag_value=${datacenter}"]
-retry_join_wan = ["provider=aws tag_key=Env tag_value=${primary_datacenter}"]
+retry_join_wan = ["provider=aws region=us-east-1 tag_key=Env tag_value=${primary_datacenter}"]
 data_dir = "/opt/consul"
 
 connect {
@@ -70,6 +70,20 @@ ports {
 client_addr = "0.0.0.0"
 recursors = ["127.0.0.53"]
 enable_central_service_config = true
+EOF
+
+cat << EOF > /etc/consul.d/internet.hcl
+service {
+  name = "internet-connectivity"
+  id = "internet-${datacenter}"
+  port = 80
+  check {
+    name = "ping check"
+    args = ["ping","-c1","www.google.com"]
+    interval = "30s"
+    status = "passing"
+  }
+}
 EOF
 
 #Enable the service

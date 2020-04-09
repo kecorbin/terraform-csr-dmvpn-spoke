@@ -26,8 +26,6 @@ variable "csr_hostname" {
 
 variable "datacenter" {
 }
-variable "csr_internal_ip" {}
-
 variable "hub_organization" {}
 
 variable "hub_workspace_name" {}

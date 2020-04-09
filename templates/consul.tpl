@@ -268,7 +268,7 @@ cat << EOF > /home/ubuntu/dmvpn-gateway.json
     "Name": "SSH Access",
     "Notes": "Cisco CSR router",
     "Status": "passing",
-    "ServiceID": "${csr_hostname}-ssh"
+    "ServiceID": "${csr_hostname}-ssh",
     "Definition": {
       "TCP": "${csr_private_ip}:22",
       "Interval": "5s",

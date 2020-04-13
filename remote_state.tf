@@ -20,4 +20,5 @@ locals {
   isakmp_key = data.terraform_remote_state.hub.outputs.isakmp_key
   tunnel_key = data.terraform_remote_state.hub.outputs.tunnel_key
   nhrp_authentication_key = data.terraform_remote_state.hub.outputs.nhrp_authentication_key
+  csr_hostname = "${var.datacenter}-csr1"
 }

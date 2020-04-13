@@ -11,7 +11,7 @@ data "aws_ami" "csr" {
 data "template_file" "csr_userdata" {
   template = "${file("${path.module}/templates/spoke.tpl")}"
   vars = {
-    hostname                = "${var.datacenter}-csr1"
+    hostname                = local.csr_hostname
     consul_ip               = aws_instance.consul.private_ip
     hub_tunnel_ip           = local.hub_tunnel_ip
     hub_public_ip           = local.hub_public_ip

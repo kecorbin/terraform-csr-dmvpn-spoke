@@ -67,7 +67,7 @@ data "template_file" "init" {
     datacenter         = var.datacenter
     primary_datacenter = local.hub_datacenter
     hub_consul_ip      = local.hub_consul_ip
-    csr_hostname       = var.csr_hostname
+    csr_hostname       = local.csr_hostname
     csr_private_ip     = aws_network_interface.g2.private_ip
   }
 }

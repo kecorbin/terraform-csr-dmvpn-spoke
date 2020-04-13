@@ -11,13 +11,13 @@ data "aws_ami" "csr" {
 data "template_file" "csr_userdata" {
   template = "${file("${path.module}/templates/spoke.tpl")}"
   vars = {
-    hostname                = var.csr_hostname
+    hostname                = "${var.datacenter}-csr1"
     consul_ip               = aws_instance.consul.private_ip
     hub_tunnel_ip           = local.hub_tunnel_ip
     hub_public_ip           = local.hub_public_ip
-    nhrp_authentication_key = var.nhrp_authentication_key
-    tunnel_key              = var.tunnel_key
-    isakmp_key              = var.isakmp_key
+    nhrp_authentication_key = local.nhrp_authentication_key
+    tunnel_key              = local.tunnel_key
+    isakmp_key              = local.isakmp_key
     tunnel_ip               = var.tunnel_ip
     // derive an IOS route for vpc cidr
     // e.g 10.1.0.0 255.255.0.0

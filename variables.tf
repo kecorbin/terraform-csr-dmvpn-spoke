@@ -17,9 +17,6 @@ variable "csr_instance_size" {
   default = "c4.large"
 }
 
-variable "csr_hostname" {
-}
-
 variable "datacenter" {
 }
 variable "hub_organization" {}

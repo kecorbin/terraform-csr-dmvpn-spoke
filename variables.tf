@@ -1,8 +1,4 @@
-variable "vpc_name" {
-  default = "my-vpc"
-}
-variable "vpc_cidr" {
-}
+variable "vpc_cidr" {}
 variable "region" {
   default = "us-east-1"
 }
@@ -29,11 +25,5 @@ variable "datacenter" {
 variable "hub_organization" {}
 
 variable "hub_workspace_name" {}
-
-variable "tunnel_key" {}
-
-variable "nhrp_authentication_key" {}
-
-variable "isakmp_key" {}
 
 variable "tunnel_ip" {}
